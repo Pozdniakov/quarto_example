@@ -35,9 +35,11 @@ preload-iframes: true
 Форматирование **полужирным** и *курсивом*
 ```
 
--  > Цитаты
+-   
 
-```
+    > Цитаты
+
+```         
 > Цитаты
 ```
 
@@ -63,7 +65,7 @@ preload-iframes: true
 
 ## Картинки {background-iframe="polygon-mask/index.html"}
 
-```
+```         
 https://www.meme-arsenal.com/memes/625951eed075b69aa844478e865b79eb.jpg
 ```
 
@@ -90,7 +92,7 @@ log(1:10)
 
 -   Можно настраивать с помощью различных параметров, будут ли показываться ошибки, сообщения, сам код или результат его выполнения.
 
-## Таблицы 
+## Таблицы
 
 ```{r}
 #| echo: true
@@ -111,13 +113,8 @@ gg_penguin <- ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) +
   hrbrthemes::theme_ft_rc()
 gg_penguin
 ```
-## {background-iframe="multiple-images/index.html"}
 
-::: {style="color:#AA5512; background-color: #ffffff33; border-radius: 10px; padding: 5px;"}
-::: r-fit-text
-ДОБАВИМ ДИНАМИКИ!
-:::
-:::
+## ДОБАВИМ ДИНАМИКИ! {background-iframe="multiple-images/index.html"}
 
 ## Динамические визуализации
 
@@ -127,7 +124,7 @@ library(plotly)
 ggplotly(gg_penguin)
 ```
 
-## Интерактивные таблицы {}
+## Интерактивные таблицы
 
 ::: {style="background-color: #ffffff95; border-radius: 10px; padding: 5px;"}
 ```{r}
@@ -139,7 +136,6 @@ datatable(penguins,
           extensions = 'FixedColumns') %>%
   DT::formatStyle(columns = TRUE, fontSize = '50%')
 ```
-
 :::
 
 ## Интерактивные карты
@@ -176,4 +172,3 @@ leaflet() %>%
              icon = my_icon,
              popup = "Примерно здесь сидит Иван")
 ```
-
