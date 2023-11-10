@@ -1,0 +1,174 @@
+---
+title: "Пример Quarto"
+format:
+  revealjs:
+    theme: blood
+    df-print: kable
+editor: visual
+preload-iframes: true
+---
+
+#  {background-iframe="polygon-mask/index.html"}
+
+::: {style="background-color: #ffffff33; border-radius: 10px; padding: 5px;"}
+::: r-fit-text
+Пример презентации Quarto
+:::
+
+Поздняков Иван
+:::
+
+## Форматирование Markdown
+
+-   Чтобы сделать списки, используйте `-` :
+
+```         
+ - Первый элемент
+ - Второй элемент
+  + Первый подэлемент
+  + Второй подэлемент
+```
+
+-   Форматирование **полужирным** и *курсивом*:
+
+```         
+Форматирование **полужирным** и *курсивом*
+```
+
+-   
+
+    > Цитаты
+
+```         
+> Цитаты
+```
+
+## Форматирование Markdown
+
+-   Заголовки разных уровней:
+
+```         
+# Header 1
+## Header 2
+### Header 3
+#### Header 4
+##### Header 5
+###### Header 6
+```
+
+-   Гиперссылки: [Книжка с материалами](https://pozdniakov.github.io/tidy_stats/)
+
+```         
+ - Гиперссылки:
+[Книжка с материалами](https://pozdniakov.github.io/tidy_stats/)
+```
+
+## Картинки {background-iframe="polygon-mask/index.html"}
+
+```         
+https://www.meme-arsenal.com/memes/625951eed075b69aa844478e865b79eb.jpg
+```
+
+![](https://www.meme-arsenal.com/memes/625951eed075b69aa844478e865b79eb.jpg)
+
+## LaTeX формулы {background-iframe="polygon-mask/index.html"}
+
+```         
+$$s = \sqrt{\frac{1}{N-1} \sum_{i=1}^N (x_i - \overline{x})^2} $$
+```
+
+$$s = \sqrt{\frac{1}{N-1} \sum_{i=1}^N (x_i - \overline{x})^2} $$
+
+## Блоки с кодом
+
+-   Вставить новый чанк с R: **Ctrl + Alt + I (Cmd - Option - I).**
+
+-   Внутри чанка пишете код на R:
+
+```{r}
+#| echo: true
+log(1:10)
+```
+
+-   Можно настраивать с помощью различных параметров, будут ли показываться ошибки, сообщения, сам код или результат его выполнения.
+
+## Таблицы
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+library(tidyverse)
+penguins <- read_csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/penguins.csv") %>% drop_na()
+penguins
+```
+
+## Картинки
+
+```{r}
+#| echo: true
+gg_penguin <- ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species)) +
+  ggsci::scale_color_tron() +
+  hrbrthemes::theme_ft_rc()
+gg_penguin
+```
+
+## ДОБАВИМ ДИНАМИКИ! {background-iframe="multiple-images/index.html"}
+
+## Динамические визуализации
+
+```{r}
+#| echo: true
+library(plotly)
+ggplotly(gg_penguin)
+```
+
+## Интерактивные таблицы
+
+::: {style="background-color: #ffffff95; border-radius: 10px; padding: 5px;"}
+```{r}
+#| echo: true
+library(DT)
+datatable(penguins, 
+          class = "compact",
+          style = "bootstrap4",
+          extensions = 'FixedColumns') %>%
+  DT::formatStyle(columns = TRUE, fontSize = '50%')
+```
+:::
+
+## Интерактивные карты
+
+```{r}
+#| column: screen
+
+geo <- read_csv("data/geocoded.csv")
+ourplace <- tibble(lng = 55.812044, lat = 37.635287)
+
+library(leaflet)
+
+my_icon <- makeIcon(
+  #iconUrl = "https://blastim.ru/wp-content/uploads/2018/06/1_blastim_logo_main_rgb.png",
+  iconUrl = "https://cran.r-project.org/Rlogo.svg",
+  iconWidth = 38, iconHeight = 95,
+  iconAnchorX = 0, iconAnchorY = 0
+)
+
+
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(data = geo, 
+                   clusterOptions = markerClusterOptions(),
+                   opacity = 0.9, fillOpacity = 0.6, radius = 6,
+                   color = "purple",
+                   popup = paste("Студент,", geo$city)) %>%
+  addMarkers(lat = 55.812044,
+             lng = 37.635287,
+             icon = my_icon,
+             popup = "Центр вселенной на текущий момент") %>%
+  addMarkers(lat = 41.709462,
+             lng = 44.763832,
+             icon = my_icon,
+             popup = "Примерно здесь сидит Иван")
+```

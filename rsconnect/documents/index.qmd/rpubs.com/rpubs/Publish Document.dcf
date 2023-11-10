@@ -1,0 +1,11 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/1033407/0531dd915cc345a78d81fbe47cc546ed
+bundleId: https://api.rpubs.com/api/v1/document/1033407/0531dd915cc345a78d81fbe47cc546ed
+url: http://rpubs.com/Pozdniakov/1033407
+when: 1682424771.53361
+lastSyncTime: 1682424771.53363
